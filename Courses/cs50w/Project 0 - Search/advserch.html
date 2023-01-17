@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<link rel="stylesheet" href="advsearch.css">
+
+</head>
+
+<body style="background-color: #191919; color: white;">
+
+    <h2 id="title">
+        Advance Search
+    </h2>
+
+    <hr>
+
+
+
+<form action = "Search.html">
+
+    <input id="back" type="submit" value="Normal Search">
+
+</form>
+
+<form style="margin: 8px; position: relative; top: 70px;" ">
+    <p>
+    <label style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Find Pages With : </label>
+    </p>
+</form>
+
+<form action="https://www.google.co.in/search?">
+    <p>
+        <label class="label"> all these words :  <input class="input" type="text" name="q"> </label>
+    </p>
+</form>
+
+<form action="https://www.google.co.in/search?">
+    <p>
+        <input type="hidden" name="as_q" value="">
+        <label class="label"> this exact word or phrase :<input class="input" type="text" name="as_epq"> </label>
+    </p>
+</form>
+
+<form action="https://www.google.co.in/search?">
+    <p>
+        <input type="hidden" name="as_q" value="">
+        <input type="hidden" name ="as_epq" value=""> 
+        <label class="label"> any of these words : <input class="input" type="text" name="as_oq" > </label>
+    </p>
+</form>  
+
+<form action="https://www.google.co.in/search?">
+    <p>
+        <input type="hidden" name="as_q" value="">
+        <input type="hidden" name ="as_epq" value="">
+        <input type="hidden" name="as_oq" value="">
+        <label class="label"> none of these words :<input class="input" type="text" name="as_eq"> </label>
+    </p>
+</form>
+
+<form>
+    <p>
+        <input id="search" type="submit" value="Search">
+
+    </p>
+
+
+
+</form>
+
+
+
+
+</body>
+</html>

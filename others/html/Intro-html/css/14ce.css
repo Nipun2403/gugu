@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+.body-main
+{
+  /* background-color: lightblue; */
+  padding-top: 70px;
+}
+
+.inline
+{
+  display: inline-block;
+}
+
+p
+{
+  margin: 0px;
+  font-family: Roboto;
+}
+
+.header
+{
+  display: flex;
+  position:fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding-top: 8px;
+  height: 50px;
+  vertical-align: top;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  background-color: white;
+}
+
+.pfp
+{
+  margin: 0px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 45px;
+  object-fit: cover;
+  object-position: left;
+}
+
+.left-header
+{
+  padding-left: 20px;
+  
+}
+
+.middle-header
+{
+  /* background-color: lightblue; */
+  flex:1;
+  padding-left: 10px;
+  padding-top: 10px;
+  font-size: 17px;
+  font-weight: 00;
+}
+
+.right-header
+{
+  width: 200px;
+  padding-top: 10px;
+
+}
+
+.add 
+{
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(87, 140, 255);
+  color: white;
+  padding: 7px 12px;
+  font-weight: 600;
+
+}
+
+.message
+{
+  border: none;
+  border-radius: 5px;
+  background-color: #e4e5e9;
+  color: black;
+  padding: 7px 14px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.body
+{
+  display: flex;
+
+}
+
+.column-1
+{
+  background-color: #303030;
+  position: fixed;
+  top: 58px;
+  bottom: 0px;
+  left: 0;
+  margin: 0;
+  padding: 15px 15px 15px 15px 
+}
+
+.img-list
+{
+  margin-bottom: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+
+}
+
+.column-2
+{
+  margin: 0;
+  color: white;
+  position: fixed;
+  top: 58px;
+  left: 80px;
+  background-color: #484848;
+  padding-left: 12px;
+  height: 100%;
+}
+
+.clmn2-header
+{
+  margin: 0px;
+  padding: 0;
+  /* margin-bottom: 20px; */
+}
+
+.text1
+{
+  font-size: 15px;
+  padding-top: 12px;
+  padding-left: 10px;
+  font-weight: 500;
+
+}
+
+.text2
+{
+  padding-left: 160px;
+  font-size: 20px;
+  /* padding-top: 10px; */
+  padding-right: 10px;
+  font-weight: 600;
+  color: #c4c4c4;
+}
+
+.clmn2-body
+{
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+.text-clmn2
+{
+  padding-bottom: 20px;
+  color: #c4c4c4;
+}

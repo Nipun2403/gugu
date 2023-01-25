@@ -1,0 +1,25 @@
+@media (max-width: 1000px) {
+	.iphone {
+		/* display: none; */
+		position: static;
+		transform: none;
+		width: 35%;
+		margin-top: 4rem;
+	}
+
+	.container-title {
+		text-align: center;
+		padding: 3% 5% 8%;
+	}
+
+	#title {
+		height: 80rem;
+	}
+
+	.press-logo
+	{
+		width: 20%;
+		margin: 30px 30px 10px;
+	}
+}
+

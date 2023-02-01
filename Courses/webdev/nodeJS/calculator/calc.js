@@ -1,13 +1,25 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", function (req,res)
 {
-  res.send("");
+  res.sendFile(__dirname + "/bmi.html");
 })
 
-app.listen(4000, function()
+app.post("/", function (req,res)
 {
-  console.log("Server Started at port 4000");
+  var height = req.body.height;
+  var weight = req.body.weight;
+
+  bmi = weight / (height**2);
+
+  res.send("Your BMI : " + bmi);
+})
+
+app.listen(3000, function()
+{
+  console.log("Server Started at port 3000");
 })

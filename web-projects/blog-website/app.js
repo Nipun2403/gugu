@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash")
+const mongoose = require("mongoose");
 
 // Sample Text
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
@@ -13,12 +14,12 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 // Initializing app
 const app = express();
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 
 // Decalring Variables and Functions
-var posts =[];
+let posts = [];
 
 // String Truncating Function
 function truncateString(str, num) {
@@ -29,86 +30,177 @@ function truncateString(str, num) {
 }
 
 
+mongoose.connect("mongodb://127.0.0.1:27017/blogsDB", {
+  useNewUrlParser: true
+});
+
+const blogSchmea = new mongoose.Schema(
+  {
+    title: String,
+    content: String
+  }
+);
+
+const Blog = mongoose.model("Blog", blogSchmea);
+
+
+
+Blog.find(function(err,blog)
+  {
+    if (err)
+    {
+      console.log(err);
+    }
+    else
+    {
+      blog.forEach(function(blogs)
+      {
+        let postO = 
+        {
+          title: blogs.title,
+          content: blogs.content
+        };
+
+        posts.push(postO);
+
+      })
+    }
+  })
+
 
 
 // Home Route
-app.get("/", function(req,res)
-{
-  res.render('home', {homeContent: homeStartingContent, posts: posts});
-
+app.get("/", function (req, res) {
+  
+  res.render('home', { homeContent: homeStartingContent, posts: posts });
 
 });
 
 // About Route
-app.get("/about", function(req,res)
-{
-  res.render('about', {aboutContent: aboutContent})
+app.get("/about", function (req, res) {
+  res.render('about', { aboutContent: aboutContent })
 
 });
 
 // Contact Route
-app.get("/contact", function(req,res)
-{
-  res.render('contact', {contactContent: contactContent})
+app.get("/contact", function (req, res) {
+  res.render('contact', { contactContent: contactContent })
 
 });
 
 // Compose Route
-app.get("/compose", function(req,res)
-{
+app.get("/compose", function (req, res) {
   res.render('compose')
 });
 
 
 // New Post Request
-app.post("/", function(req,res)
-{
+app.post("/compose", function (req, res) {
 
   // defining post json
-  const post = {
-    title: req.body.postTitle,
-    body: req.body.postBody
-  };  
+  // const post = {
+  //   title: req.body.postTitle,
+  //   body: req.body.postBody
+  // };  
+
+  const post = new Blog(
+    {
+      title: req.body.postTitle,
+      content: req.body.postBody
+    });
+
+  posts.push(post);
 
   // pusing json post into global posts array
-  posts.push(post)
-  
+  // posts.push(post)
+
+
   // console.log(posts);
   // compose.push(composeItem);
-
+  post.save();
   res.redirect("/compose");
 });
 
-app.get('/posts/:id', function(req,res)
-{ 
-  // console.log(req.params.id);
+app.get('/:id', function (req, res) {
+
   let requestedTitle = _.lowerCase(req.params.id);
-  posts.forEach(function(post)
+
+  Blog.find(function(err,blog)
   {
-    let actualTitle = _.lowerCase(post.title)
-    if (actualTitle ===requestedTitle )
+    if (err)
     {
-      res.render('post', {title: post.title, body: post.body  })
-      // console.log("Match Found"); 
-      
+      console.log(err);
     }
-    else
-    {
-      res.redirect("/")
-      
+    else{
+      blog.forEach(function(blogs)
+      {
+        let actualTitle = _.lowerCase(blogs.title);
+        if ( actualTitle === requestedTitle)
+        {
+
+          res.render('post', { title: blogs.title, body: blogs.content })
+
+        }
+      })
     }
   })
-  
+
+
+
+
+});
+
+
+
+
+
+
+  // posts.forEach(function (post) {
+  //   let actualTitle = _.lowerCase(post.title)
+  //   if (actualTitle === requestedTitle) {
+  //     res.render('post', { title: post.title, body: post.body })
+  // console.log("Match Found"); 
+
+// }
+//     else {
+//     res.redirect("/")
+
+//   }
+//   })
+
   // res.redirect("/")
-})
+// })
+
+
+// Blog.find(function (err, blog) {
+//   if (err) {
+//     console.log(err);
+//   }
+//   else {
+
+//     fruit.forEach(function (blogs) {
+//       // let title = blogs.title;
+//       // let content = blogs.content;
+
+//       if (blog.title === requestedTitle) {
+//         res.render('post', { title: blog.title, body: blog.content })
+//         // console.log("Match Found"); 
+
+
+//       }
+//       else {
+//         console.log("Not found");
+//       }
+//     })
+//   }
+//   mongoose.connection.close();
+// })
 
 
 
 
 
 
-
-
-app.listen(3000, function() {
+app.listen(3000, function () {
   console.log("Server up and running on port 3000");
 });
